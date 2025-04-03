@@ -1,5 +1,13 @@
-This is the test app for the preloader.
+to reproduce the unstable hashes issue:
 
-Use `pnpm preview` to run the app and observe the network requests and the console output.
+```
+pnpm i
+```
 
-The modules have been configured to have a random size between 0.5kb and 50kb, and when they load they will log a message to the console and add their id to the `_loaded` array.
+```
+pnpm build.client
+```
+
+Observe the hash name of the last file. Repeat the build a few times. It will change.
+
+Then uncomment the `maxParallelFileOps: 1` line in `vite.config.ts`, and the hash will no longer change.
